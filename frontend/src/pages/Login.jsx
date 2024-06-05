@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 
-const Header = () => {
+const Login = () => {
   return (
-    <div>Header</div>
+    <div>Login</div>
   )
 }
 
-export default Header
+export default Login
