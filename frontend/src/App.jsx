@@ -15,9 +15,8 @@ function App() {
       <DoctorList/>
       <FaqList/>
       <Testimonial/>
+      {/*<Layout/>*/}
     </>
-
-    {/*<Layout/>*/}
 
   )
 }
