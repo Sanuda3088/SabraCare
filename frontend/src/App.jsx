@@ -1,4 +1,7 @@
-
+import DoctorList from "./components/Doctors/DoctorList"
+import FaqList from "./components/Faq/FaqList"
+import Testimonial from "./components/Testimonial/Testimonial"
+import './App.css'
 
 
 function App() {
@@ -6,7 +9,9 @@ function App() {
 
   return (
     <>
-      <h1 className='text-[80px] text-blue-600'>Hello React + Vite    please follow the video </h1>
+      <DoctorList/>
+      <FaqList/>
+      <Testimonial/>
     </>
   )
 }
