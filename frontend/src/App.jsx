@@ -1,13 +1,23 @@
 
+import DoctorList from "./components/Doctors/DoctorList"
+import FaqList from "./components/Faq/FaqList"
+import Testimonial from "./components/Testimonial/Testimonial"
+import './App.css'
+
+  {/*import "./index.css";
+import Layout from "./layout/Layout";*/}
+
 
 
 function App() {
- 
-
   return (
     <>
-      <h1 className='text-[80px] text-blue-600'>Hello React + Vite    please follow the video </h1>
+      <DoctorList/>
+      <FaqList/>
+      <Testimonial/>
+      {/*<Layout/>*/}
     </>
+
   )
 }
 
