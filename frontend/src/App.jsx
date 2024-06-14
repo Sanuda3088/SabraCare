@@ -1,3 +1,4 @@
+import "./App.css";
 import "./index.css";
 import Layout from "./layout/Layout";
 
