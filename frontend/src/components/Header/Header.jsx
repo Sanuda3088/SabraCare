@@ -1,9 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import logo from "../../assets/images/logo.png";
-import userImg from "../../assets/images/avatar-icon.png";
 import { NavLink, Link } from "react-router-dom";
-import {BiMenu} from "react-icons/bi";
+import userImg from "../../assets/images/avatar-icon.png";
 
 const navLinks = [
   {
@@ -25,29 +24,8 @@ const navLinks = [
 ];
 
 const Header = () => {
-
-  const headerRef = useRef(null)
-  const menuRef = useRef(null)
-
-  const handleStickyHeader = () =>{
-    window.addEventListener('scroll', ()=>{
-      if(document.body.scrollTop > 80 || document.documentElement.scrollTop >80){
-        headerRef.current.classList.add('sticky_header')
-      }else{
-        headerRef.current.classList.add('sticky_header')
-      }
-    })
-  }
-
-  useEffect(()=>{
-    handleStickyHeader()
-    return ()=> window.removeEventListener('scroll',handleStickyHeader)
-  });
-
-  const toggleMenu = ()=> menuRef.current.classList.toggle('show_menu')
-
   return (
-    <header className="header flex items-center" ref={headerRef}>
+    <header className="header flex items-center">
       <div className="container">
         <div className="flex items-center justify-between">
           {/*========logo==========*/}
@@ -55,7 +33,7 @@ const Header = () => {
             <img src={logo} alt="" />
           </div>
           {/* ======== menu ========= */}
-          <div className="navigation" ref={menuRef} onClick={toggleMenu}>
+          <div className="navigation">
             <ul className="menu flex item-center gap-[2.7rem]">
               {navLinks.map((link, index) => (
                 <li key={index}>
@@ -75,23 +53,13 @@ const Header = () => {
           </div>
           {/* ======= nav Right ======== */}
           <div className="flex items-center gap-4">
-              <div className = "hidden">
+              <div>
                 <Link to='/'>
-                <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
+                <figure className="w-[35px] h-[35px] rounded-full">
                   <img src={userImg} className="w-full rounded-full" alt="" />
                 </figure>
                 </Link>
               </div>
-
-              <Link to='/login'>
-                <button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]">
-                  Login
-                </button>
-              </Link>
-
-              <span className="md:hidden" onClick={toggleMenu}>
-                <BiMenu className='w-6 h-6 cursor-pointer' />
-              </span>
           </div>
         </div>
       </div>
