@@ -4,8 +4,8 @@ import FaqList from "./components/Faq/FaqList"
 import Testimonial from "./components/Testimonial/Testimonial"
 import './App.css'
 
-// import Doctors from "./pages/Doctors/Doctors"
-// import DoctorDetails from "./pages/Doctors/DoctorDetails"
+import Doctors from "./pages/Doctors/Doctors"
+import DoctorDetails from "./pages/Doctors/DoctorDetails"
 
 import Header from "./components/Header/Header"
 import Home from "./pages/Home"
@@ -33,7 +33,8 @@ function App() {
       <DoctorList/>
       <FaqList/>
       <Testimonial/>
-      <Footer/>
+      <DoctorDetails/>
+      <Footer/> 
       {/*<Layout/>*/}
 
     </>
