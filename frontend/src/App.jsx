@@ -10,6 +10,7 @@ import DoctorDetails from "./pages/Doctors/DoctorDetails"
 import Header from "./components/Header/Header"
 import Home from "./pages/Home"
 import Footer from "./components/Footer/Footer"
+import Login from "./pages/Login"
 
 
   {/*import "./index.css";
@@ -29,6 +30,7 @@ function App() {
       <DoctorDetails/> */}
 
       <Header/>
+      <Login/>
       <Home/>
       <DoctorList/>
       <FaqList/>
