@@ -11,6 +11,7 @@ import Header from "./components/Header/Header"
 import Home from "./pages/Home"
 import Footer from "./components/Footer/Footer"
 import Login from "./pages/Login"
+import Signup from "./pages/Signup"
 
 
   {/*import "./index.css";
@@ -31,6 +32,7 @@ function App() {
 
       <Header/>
       <Login/>
+      <Signup/>
       <Home/>
       <DoctorList/>
       <FaqList/>
