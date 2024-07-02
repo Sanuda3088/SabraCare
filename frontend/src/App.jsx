@@ -23,13 +23,6 @@ function App() {
   return (
     <>
 
-      {/* <DoctorList/>
-      <FaqList/>
-      <Testimonial/> 
-      <Layout/> */}
-      {/* <Doctors/>
-      <DoctorDetails/> */}
-
       <Header/>
       <Login/>
       <Signup/>
@@ -39,7 +32,6 @@ function App() {
       <Testimonial/>
       <DoctorDetails/>
       <Footer/> 
-      {/*<Layout/>*/}
 
     </>
 
