@@ -10,6 +10,9 @@ import DoctorDetails from "./pages/Doctors/DoctorDetails"
 import Header from "./components/Header/Header"
 import Home from "./pages/Home"
 import Footer from "./components/Footer/Footer"
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
+import Layout from "./layout/Layout"
 
 
   {/*import "./index.css";
@@ -21,21 +24,16 @@ function App() {
   return (
     <>
 
-      {/* <DoctorList/>
-      <FaqList/>
-      <Testimonial/> 
-      <Layout/> */}
-      {/* <Doctors/>
-      <DoctorDetails/> */}
-
-      <Header/>
+      {/*<Header/>
+      <Login/>
+      <Signup/>
       <Home/>
       <DoctorList/>
       <FaqList/>
       <Testimonial/>
       <DoctorDetails/>
-      <Footer/> 
-      {/*<Layout/>*/}
+      <Footer/> */}
+      <Layout/>
 
     </>
 
