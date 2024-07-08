@@ -12,6 +12,7 @@ import Home from "./pages/Home"
 import Footer from "./components/Footer/Footer"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
+import Layout from "./layout/Layout"
 
 
   {/*import "./index.css";
@@ -23,7 +24,7 @@ function App() {
   return (
     <>
 
-      <Header/>
+      {/*<Header/>
       <Login/>
       <Signup/>
       <Home/>
@@ -31,7 +32,8 @@ function App() {
       <FaqList/>
       <Testimonial/>
       <DoctorDetails/>
-      <Footer/> 
+      <Footer/> */}
+      <Layout/>
 
     </>
 
