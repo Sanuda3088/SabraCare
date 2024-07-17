@@ -60,3 +60,5 @@ const MyAccount = () => {
 }
 
 export default MyAccount
+
+// Its all about the account section
