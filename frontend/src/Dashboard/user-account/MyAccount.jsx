@@ -27,7 +27,7 @@ const MyAccount = () => {
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
-        {loading && !error && <Loader />}
+        {loading && !error && <Loading/>}
         {error && !loading && <Error errorMsg={error} />}
 
         {!loading && !error && (
@@ -96,7 +96,7 @@ const MyAccount = () => {
                 </button>
               </div>
               {tab === "bookings" && <MyBookings />}
-              {tab === "settings" && <Profile />}
+              {tab === "settings" && <Profile user={userData}/>}
             </div>
           </div>
         )}
