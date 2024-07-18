@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import uploadImageToCloudinary from "../../../utils/uploadImageToCloudinary";
 import { BASE_URL, token } from "../../config";
 import { toast } from "react-toastify";
-import Hashloader from 'react-spinners/Hashloader';
+import Hashloader from "react-spinners/HashLoader.js"
 
 const Profile = ({user}) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -22,15 +22,15 @@ const Profile = ({user}) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setFormData({
-      name: user.name,
-      email: user.email,
-      photo: user.photo,
-      gender: user.gender,
-      bloodType: user.bloodType,
-    });
-  },[user]);
+  // useEffect(() => {
+  //   setFormData({
+  //     name: user.name,
+  //     email: user.email,
+  //     photo: user.photo,
+  //     gender: user.gender,
+  //     bloodType: user.bloodType,
+  //   });
+  // },[user]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
