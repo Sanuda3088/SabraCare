@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import signupImg from "../assets/images/signup.gif";
+import avatar from "../assets/images/doctor-img01.png";
 import { Link, useNavigate } from "react-router-dom";
 import uploadImageToCloudinary from "../../utils/uploadImageToCloudinary";
 import { BASE_URL } from "../config";
 import {toast} from 'react-toastify';
-import Hashloader from 'react-spinners/Hashloader';
+import Hashloader from "react-spinners/HashLoader.js"
 
 
 
