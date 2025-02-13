@@ -17,6 +17,7 @@ const Profile = () => {
       { startingDate: "", endingDate: "", position: "", hospital: "" },
     ],
     timeSlots: [{ day: "", startingTime: "", endingTime: "" }],
+    about:''
   });
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -323,7 +324,17 @@ const Profile = () => {
         </div>
        
         {/* start about section here  */}
-        <div className="mb-5"><p>About</p></div>
+        <div className="mb-5">
+          <p className="form__label">About*</p>
+          <textarea 
+            name="about" 
+            rows={5} 
+            value={formData.about} 
+            placeholder="Write about you" 
+            onChange={handleInputChange} 
+            className="form__input">
+          </textarea>
+        </div>
       </form>
     </div>
   );
