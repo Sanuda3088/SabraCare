@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
-import uploadImageToCloudinary from './../../utils/uploadCloudinary';
+import uploadImageToCloudinary from '../../../utils/uploadImageToCloudinary';
 import { BASE_URL, token } from './../../config';
 import { toast } from 'react-toastify'
 
