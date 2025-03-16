@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import uploadImageToCloudinary from "../../utils/uploadImageToCloudinary";
 import { BASE_URL } from "../config";
 import {toast} from 'react-toastify';
-import Hashloader from 'react-spinners/Hashloader';
+import Hashloader from "react-spinners/HashLoader.js"
 
 
 
