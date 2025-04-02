@@ -237,6 +237,21 @@ const Home = () => {
 
       {/* Feature-section end */}
 
+       {/* {====== our great doctors start =========} */}
+       <section>
+        <div className="container">
+          <div className="xl:w-[470px] mx-auto">
+            <h2 className="heading text-center"> Our great doctors</h2>
+            <p className="text__para text-center">
+              World-class care for everyone.Our Health System Offers unmatched,
+              expert health care
+            </p>
+          </div>
+          
+        </div>
+      </section>
+      {/* {====== our great doctors end =========} */}
+
     </>
   );
 };
