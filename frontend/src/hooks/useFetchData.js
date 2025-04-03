@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState} from "react";
 import { token } from "../config";
 
 const useFetchData = (url) => {
@@ -15,6 +15,7 @@ const useFetchData = (url) => {
         });
 
         const result = await res.json();
+        console.log('bearer tken is ',token)
 
         if (!res.ok) {
           throw new Error(result.message);
