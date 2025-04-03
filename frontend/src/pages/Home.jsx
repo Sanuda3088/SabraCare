@@ -14,6 +14,8 @@ import { BsArrowRight } from "react-icons/bs";
 import About from "../components/About/About";
 import ServiceList from "../components/Services/ServiceList";
 import DoctorList from "../components/Doctors/DoctorList";
+import DoctorCard from './../components/Doctors/DoctorCard'
+import {doctors} from './../assets/data/doctors'
 
 const Home = () => {
   return (
@@ -248,7 +250,17 @@ const Home = () => {
               expert health care
             </p>
           </div>
-          <DoctorList />
+          <section>
+            <div className="container">
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 '>
+                {doctors.map(doctor=>(
+                  <DoctorCard key={doctor.id} doctor={doctor}/>
+                ))}
+
+              </div>
+            </div>
+          </section>
+
         </div>
       </section>
       {/* {====== our great doctors end =========} */}
