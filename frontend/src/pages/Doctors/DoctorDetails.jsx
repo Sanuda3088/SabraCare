@@ -30,7 +30,7 @@ const DoctorDetails = () => {
     ticketPrice,
     photo,
   } = doctor;
-  // console.log("doctor is",doctor);
+  console.log("doctor is",doctor);
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">

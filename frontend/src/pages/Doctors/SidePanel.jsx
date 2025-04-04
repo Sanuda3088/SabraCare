@@ -49,17 +49,18 @@ const SidePanel = ({doctorId, ticketPrice, timeSlots }) => {
           Available Time Slots
         </p>
         <ul className='mt-3'>
-          {timeSlots?.Map((item, index)=>(
-            <li key={index} className="flex items-center justify-between mb-2">
-            <p className="text-[15px] leading-6 text-textColor font-semibold">
-              {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
-            </p>
-            <p className="text-[15px] leading-6 text-textColor font-semibold">
-              {convertTime(item.startTime)} - {convertTime(item.endingTime)}
-            </p>
-          </li>
-          ))}
-        </ul>
+  {timeSlots?.map((item, index) => (  // Changed 'Map' to 'map'
+    <li key={index} className="flex items-center justify-between mb-2">
+      <p className="text-[15px] leading-6 text-textColor font-semibold">
+        {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
+      </p>
+      <p className="text-[15px] leading-6 text-textColor font-semibold">
+        {convertTime(item.startingTime)} - {convertTime(item.endingTime)}  {/* Fixed the typos */}
+      </p>
+    </li>
+  ))}
+</ul>
+
       </div>
       <button className='btn px-2 w-full rounded-md'>Book Appointment</button>
     </div>
