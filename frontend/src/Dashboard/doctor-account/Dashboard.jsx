@@ -94,7 +94,7 @@ const Dashboard = () => {
                 )}
                 {tab === "settings" && <Profile doctorData={data}/>}
 
-                {tab === "appoinments" && <div>appoinments</div>}
+                {/* {tab === "appoinments" && <div>appoinments</div>} */}
                 {tab === "profile" && 
                 <div>
                   <Profile doctorData={data}></Profile>

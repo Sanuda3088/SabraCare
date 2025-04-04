@@ -13,6 +13,9 @@ import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import About from "../components/About/About";
 import ServiceList from "../components/Services/ServiceList";
+import DoctorList from "../components/Doctors/DoctorList";
+import DoctorCard from './../components/Doctors/DoctorCard'
+import {doctors} from './../assets/data/doctors'
 
 const Home = () => {
   return (
@@ -236,6 +239,31 @@ const Home = () => {
       </section>
 
       {/* Feature-section end */}
+
+       {/* {====== our great doctors start =========} */}
+       <section>
+        <div className="container">
+          <div className="xl:w-[470px] mx-auto">
+            <h2 className="heading text-center"> Our great doctors</h2>
+            <p className="text__para text-center">
+              World-class care for everyone.Our Health System Offers unmatched,
+              expert health care
+            </p>
+          </div>
+          <section>
+            <div className="container">
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 '>
+                {doctors.map(doctor=>(
+                  <DoctorCard key={doctor.id} doctor={doctor}/>
+                ))}
+
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </section>
+      {/* {====== our great doctors end =========} */}
 
     </>
   );
