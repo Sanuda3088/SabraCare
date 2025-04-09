@@ -22,7 +22,7 @@
   "license": "ISC",
   "type": "module",
   "engines": {
-    "node": "22.x"
+    "node": "18.x"
   },
   "description": ""
 }
