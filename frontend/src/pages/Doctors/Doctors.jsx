@@ -10,26 +10,29 @@ import Error from "../../components/Error/Error";
 import { useEffect, useState } from "react";
 
 const Doctors = () => {
-
   const [query, setQuery] = useState("");
   const [debounceQuery, setDebounceQuery] = useState("");
 
-  const handleSearch =()=>{
-    setQuery(query.trim())
-  }
+  const handleSearch = () => {
+    setQuery(query.trim());
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     const timeout = setTimeout(() => {
       setDebounceQuery(query);
     }, 700);
 
-    return ()=> clearTimeout(timeout);
-})
+    return () => clearTimeout(timeout);
+  });
 
-  const { data:doctors, loading, error } = useFetchData(`${BASE_URL}/doctors?query=${debounceQuery}`);
-  console.log("Fetched Doctors:", doctors);  // Debugging
-console.log("Loading:", loading);
-console.log("Error:", error);
+  const {
+    data: doctors,
+    loading,
+    error,
+  } = useFetchData(`${BASE_URL}/doctors?query=${debounceQuery}`);
+  console.log("Fetched Doctors:", doctors); // Debugging
+  console.log("Loading:", loading);
+  console.log("Error:", error);
   return (
     <>
       <section className="bg-[#fff9ea]">
@@ -41,9 +44,12 @@ console.log("Error:", error);
               className="py-4 pl-4 pr-2 bg-transparent w-full focus:outline-none cursor-pointer placeholder:text-textColor"
               placeholder="Search Doctor"
               value={query}
-              onChange={ e => setQuery(e.target.value)}
+              onChange={(e) => setQuery(e.target.value)}
             />
-            <button className="btn mt-0 rounded-[0px] rounded-r-md" onClick={handleSearch}>
+            <button
+              className="btn mt-0 rounded-[0px] rounded-r-md"
+              onClick={handleSearch}
+            >
               Search
             </button>
           </div>
@@ -53,14 +59,15 @@ console.log("Error:", error);
       <section>
         <div className="container">
           {loading && <Loading />}
-      {error && <Error />}
+          {error && <Error />}
 
-        {!loading && !error && <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 '>
-          {doctors.map(doctor=>(
-            <DoctorCard key={doctor.id} doctor={doctor}/>
-          ))}
-
-        </div>}
+          {!loading && !error && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 ">
+              {doctors.map((doctor) => (
+                <DoctorCard key={doctor.id} doctor={doctor} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -82,8 +89,6 @@ console.log("Error:", error);
 };
 
 export default Doctors;
-
-
 
 // eslint-disable-next-line no-unused-vars
 

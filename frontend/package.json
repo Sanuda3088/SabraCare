@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -17,6 +16,7 @@
     "react-router-dom": "^6.23.1",
     "react-spinners": "^0.14.1",
     "react-toastify": "^10.0.5",
+    "stripe": "^18.0.0",
     "swiper": "^11.1.4"
   },
   "devDependencies": {

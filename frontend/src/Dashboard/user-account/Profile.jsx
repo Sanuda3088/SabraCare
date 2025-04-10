@@ -20,17 +20,19 @@ const Profile = ({user}) => {
     bloodType: "",
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setFormData({
-  //     name: user.name,
-  //     email: user.email,
-  //     photo: user.photo,
-  //     gender: user.gender,
-  //     bloodType: user.bloodType,
-  //   });
-  // },[user]);
+  useEffect(() => {
+    console.log("User data:", user);
+    setFormData({
+      name: user.name,
+      email: user.email,
+      photo: user.photo,
+      gender: user.gender,
+      bloodType: user.bloodType,
+    });
+  },[user]);
+  
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -49,7 +51,7 @@ const Profile = ({user}) => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${BASE_URL}/users/${user.user._id}`, {
+      const res = await fetch(`${BASE_URL}/users/${user._id}`, {
         method: "put",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +68,9 @@ const Profile = ({user}) => {
 
       setLoading(false);
       toast.success(message);
-      navigate("/users/profile/me");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2500);
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
@@ -74,7 +78,7 @@ const Profile = ({user}) => {
   };
   return (
     <div className="mt-10">
-      <form onSubmit={submitHandler}>
+      <form>
         <div className="mb-5">
           <input
             type="text"
@@ -168,7 +172,8 @@ const Profile = ({user}) => {
         <div className="mt-7">
           <button
             disabled={loading && true}
-            type="submit"
+            // type="submit"
+            onClick={submitHandler}
             className="w-full px-4 py-3 bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg "
           >
             {loading ? <Hashloader size={25} color="#ffffff" /> : "Update"}

@@ -4,30 +4,58 @@ import userImg from "../../assets/images/doctor-img01.png";
 import MyBookings from "./MyBookings";
 import Profile from "./Profile";
 import useGetProfile from "../../hooks/useFetchData";
-import { BASE_URL } from "../../config";
+import { BASE_URL, token } from "../../config";
 import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
+import ConfirmPopUp from "../../pages/ConfirmPopUp";
+import { toast } from "react-toastify";
 
 const MyAccount = () => {
   const { dispatch } = useContext(authContext);
   const [tab, setTab] = useState("bookings");
+  const [isConfirmPopUpOpen, setIsConfirmPopUpOpen] = useState(false); // State to control modal visibility
+  // const navigate = useNavigate();
 
-  const {
-    data: userData,
-    loading,
-    error,
-  } = useGetProfile(`${BASE_URL}/users/profile/me`);
+  const { data, loading, error } = useGetProfile(
+    `${BASE_URL}/users/profile/me`
+  );
 
-  console.log(userData, "userdata");
+  console.log(data, "userdata");
+  console.log("data", { data }.data);
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
   };
 
+  const handleDeleteAccount = async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/users/${data._id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message);
+      }
+
+      toast.success(result.message);
+
+      // Log the user out and redirect to the login page
+      dispatch({ type: "LOGOUT" });
+      navigate("/login");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
-        {loading && !error && <Loading/>}
+        {loading && !error && <Loading />}
         {error && !loading && <Error errorMsg={error} />}
 
         {!loading && !error && (
@@ -45,15 +73,15 @@ const MyAccount = () => {
 
               <div className="text-center mt-4">
                 <h3 className="text-[18px] leading-[30px] text-headingColor font-bold">
-                  Muhibuur Rahman
+                  {data.name}
                 </h3>
                 <p className="text-textColor text-[15px] leading-6 font-medium">
-                  example@gmaol.com
+                  {data.email}
                 </p>
                 <p className="text-textColor text-[15px] leading-6 font-medium">
                   Blood Type:{" "}
                   <span className="ml-2 text-headingColor text-[22px] leading-8">
-                    O-
+                    {data.bloodType}
                   </span>
                 </p>
               </div>
@@ -65,7 +93,10 @@ const MyAccount = () => {
                 >
                   Logout
                 </button>
-                <button className="w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white">
+                <button
+                  className="w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white"
+                  onClick={() => setIsConfirmPopUpOpen(true)}
+                >
                   Delete account
                 </button>
               </div>
@@ -96,11 +127,18 @@ const MyAccount = () => {
                 </button>
               </div>
               {tab === "bookings" && <MyBookings />}
-              {tab === "settings" && <Profile user={userData}/>}
+              {tab === "settings" && <Profile user={data} />}
             </div>
           </div>
         )}
       </div>
+      <ConfirmPopUp
+        isOpen={isConfirmPopUpOpen}
+        onClose={() => setIsConfirmPopUpOpen(false)} // Close the modal
+        onConfirm={handleDeleteAccount} // Confirm delete action
+        title="Confirm Delete Account"
+        message="Are you sure you want to delete your account? This action cannot be undone."
+      />
     </section>
   );
 };

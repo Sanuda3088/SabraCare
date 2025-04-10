@@ -5,14 +5,17 @@ import { AiFillStar } from 'react-icons/ai';
 import FeedbackForm from './FeedbackForm';
 
 
-const Feedback = ({ reviews, totalRating }) => {
+const Feedback = ({ reviews}) => {
     const [showFeedbackForm, setShowFeedbackForm] = useState(false);
-  
+    console.log("reviews:",reviews);
+    // console.log("total rating: ", totalRating);
+    
+    
     return (
       <div>
         <div className="mb-[50px]">
           <h4 className="text-[20px] leading-[30px] font-bold text-headingColor mb-[30px]">
-            All reviews ({totalRating})
+            All reviews ({reviews?.length})
           </h4>
           {reviews?.map((review, index) => ( // Fixed map function
             <div key={index} className="flex justify-between gap-10 mb-[30px]">
