@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { authContext } from "../../context/AuthContext";
-import userImg from "../../assets/images/doctor-img01.png";
+import userImg from "../../assets/images/Star.png";
 import MyBookings from "./MyBookings";
 import Profile from "./Profile";
 import useGetProfile from "../../hooks/useFetchData";
@@ -19,9 +19,6 @@ const MyAccount = () => {
   const { data, loading, error } = useGetProfile(
     `${BASE_URL}/users/profile/me`
   );
-
-  console.log(data, "userdata");
-  console.log("data", { data }.data);
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
@@ -52,10 +49,16 @@ const MyAccount = () => {
     }
   };
 
+  const handleExpiredToken = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/login", { replace: true });
+  };
+
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
         {loading && !error && <Loading />}
+        {/* {error && !loading && handleExpiredToken()} */}
         {error && !loading && <Error errorMsg={error} />}
 
         {!loading && !error && (
@@ -64,7 +67,7 @@ const MyAccount = () => {
               <div className="flex items-center justify-center">
                 <figure className="w-[100px] h-[100px] rounded-full border-2 border-solid border-primaryColor">
                   <img
-                    src={userImg}
+                    src={data.photo ? data.photo : userImg}
                     alt=""
                     className="w-full h-full rounded-full"
                   />

@@ -31,21 +31,18 @@ const DoctorDetails = () => {
     ticketPrice,
     photo,
   } = doctor;
-  
-  console.log("doctor is", doctor);
+
   // Calculate the average rating
-const calculateAverageRating = (reviews) => {
-  if (!reviews || reviews.length === 0) return 0; // Handle no reviews case
+  const calculateAverageRating = (reviews) => {
+    if (!reviews || reviews.length === 0) return 0; // Handle no reviews case
 
-  const sumOfRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-  const averageRating = sumOfRating / reviews.length;
+    const sumOfRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    const averageRating = sumOfRating / reviews.length;
 
-  return averageRating.toFixed(1); // Round to 1 decimal place
-};
+    return averageRating.toFixed(1); // Round to 1 decimal place
+  };
 
-const averageRating = calculateAverageRating(doctor.reviews);
-console.log("Average Rating:", averageRating);
-
+  const averageRating = calculateAverageRating(doctor.reviews);
 
   return (
     <section>
@@ -78,7 +75,7 @@ console.log("Average Rating:", averageRating);
                     {averageRating}
                   </span>
                   <span className="text-[14px] leading-5 lg:text-[16px] lg:leading-7 font-[400] text-textColor">
-                    ({reviews?.length||0})
+                    ({reviews?.length || 0})
                   </span>
                 </div>
 

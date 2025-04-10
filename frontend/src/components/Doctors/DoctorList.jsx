@@ -1,14 +1,13 @@
-import React from 'react'
+import React from "react";
 // import { doctors } from '../../assets/data/doctors';
-import DoctorCard from './DoctorCard';
-import { BASE_URL } from './../../config'
-import useFetchData from './../../hooks/useFetchData'
-import Loading from '../../components/Loader/Loading'
-import Error from '../../components/Error/Error'
+import DoctorCard from "./DoctorCard";
+import { BASE_URL } from "./../../config";
+import useFetchData from "./../../hooks/useFetchData";
+import Loading from "../../components/Loader/Loading";
+import Error from "../../components/Error/Error";
 
 const DoctorsList = () => {
-  const { data:doctors, loading, error } = useFetchData(`${BASE_URL}/doctors`)
-  console.log(data);
+  const { data: doctors, loading, error } = useFetchData(`${BASE_URL}/doctors`);
 
   return (
     <>
@@ -23,7 +22,7 @@ const DoctorsList = () => {
         </div>
       }
     </>
-  )
-}
+  );
+};
 
-export default DoctorsList
+export default DoctorsList;

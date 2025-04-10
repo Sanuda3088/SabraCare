@@ -3,15 +3,13 @@ import { BASE_URL, token } from "../../config.js";
 import { toast } from "react-toastify";
 
 const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
-  console.log("Doctor id is ", doctorId);
-  console.log("Doctor ticketPrice is ", ticketPrice);
-  console.log("Doctor timeSlots is ", timeSlots);
-  console.log("BASE_URL is ", BASE_URL);
-  
+  const user = localStorage.getItem("user");
 
   const bookingHandler = async () => {
     try {
-      const userId = localStorage.getItem("userId");
+      // const userId = localStorage.getItem("userId");
+      const userId = JSON.parse(user)._id;
+
       const res = await fetch(
         `${BASE_URL}/bookings/checkout-session/${doctorId}/${userId}`,
         {

@@ -5,8 +5,6 @@ import { BASE_URL, token } from "./../../config";
 import { toast } from "react-toastify";
 
 const Profile = ({ doctorData }) => {
-  console.log("doctor data: ", doctorData);
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -55,7 +53,6 @@ const Profile = ({ doctorData }) => {
     e.preventDefault();
 
     try {
-      console.log("form data: ", formData);
       const res = await fetch(`${BASE_URL}/doctors/${doctorData._id}`, {
         method: "PUT",
         headers: {
@@ -73,13 +70,11 @@ const Profile = ({ doctorData }) => {
 
       toast.success(result.message);
     } catch (err) {
-      console.log(err.message);
-
       toast.error(err.message);
     }
   };
 
-  // reusable function for adding item
+  // reusable function for adding items
   const addItem = (key, item) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -112,8 +107,6 @@ const Profile = ({ doctorData }) => {
   };
 
   const addQualification = (e) => {
-    console.log("add qualification button clicked");
-
     e.preventDefault();
 
     addItem("qualifications", {

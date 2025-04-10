@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import uploadImageToCloudinary from "../../../utils/uploadImageToCloudinary";
 import { BASE_URL, token } from "../../config";
 import { toast } from "react-toastify";
-import Hashloader from "react-spinners/HashLoader.js"
+import Hashloader from "react-spinners/HashLoader.js";
 
-const Profile = ({user}) => {
+const Profile = ({ user }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,6 @@ const Profile = ({user}) => {
   // const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("User data:", user);
     setFormData({
       name: user.name,
       email: user.email,
@@ -31,8 +30,7 @@ const Profile = ({user}) => {
       gender: user.gender,
       bloodType: user.bloodType,
     });
-  },[user]);
-  
+  }, [user]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -113,7 +111,7 @@ const Profile = ({user}) => {
           />
         </div>
         <div className="mb-5">
-          <input
+          <select
             type="text"
             placeholder="Blood Type"
             name="bloodType"
@@ -121,7 +119,17 @@ const Profile = ({user}) => {
             onChange={handleInputChange}
             required
             className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none foucs:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
-          />
+          >
+            <option value="">Select</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
         </div>
         <div className="mb-5 flex items-center justify-between">
           <label className="text-headingColor font-bold text-[16px] leading-7">

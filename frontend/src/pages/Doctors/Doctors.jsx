@@ -30,9 +30,7 @@ const Doctors = () => {
     loading,
     error,
   } = useFetchData(`${BASE_URL}/doctors?query=${debounceQuery}`);
-  console.log("Fetched Doctors:", doctors); // Debugging
-  console.log("Loading:", loading);
-  console.log("Error:", error);
+
   return (
     <>
       <section className="bg-[#fff9ea]">
