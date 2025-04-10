@@ -3,8 +3,10 @@ import { AiOutlineDelete } from "react-icons/ai";
 import uploadImageToCloudinary from "../../../utils/uploadImageToCloudinary";
 import { BASE_URL, token } from "./../../config";
 import { toast } from "react-toastify";
+import Hashloader from "react-spinners/HashLoader.js";
 
 const Profile = ({ doctorData }) => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -51,7 +53,7 @@ const Profile = ({ doctorData }) => {
 
   const updateProfileHandler = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const res = await fetch(`${BASE_URL}/doctors/${doctorData._id}`, {
         method: "PUT",
@@ -68,9 +70,14 @@ const Profile = ({ doctorData }) => {
         throw Error(result.message);
       }
 
-      toast.success(result.message);
+      toast.success("Successfully Updated!");
+      setLoading(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 800);
     } catch (err) {
-      toast.error(err.message);
+      toast.error("An Error Occured");
+      setLoading(false);
     }
   };
 
@@ -543,7 +550,7 @@ const Profile = ({ doctorData }) => {
             onClick={updateProfileHandler}
             className="bg-primaryColor text-white text-[18px] leading-[30px] w-full py-3 px-4 rounded-lg"
           >
-            Update Profile
+            {loading ? <Hashloader size={25} color="#ffffff" /> : "Update Profile"}
           </button>
         </div>
       </form>
