@@ -11,8 +11,9 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
 
   const bookingHandler = async () => {
     try {
+      const userId = localStorage.getItem("userId");
       const res = await fetch(
-        `${BASE_URL}/bookings/checkout-session/${doctorId}`,
+        `${BASE_URL}/bookings/checkout-session/${doctorId}/${userId}`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
