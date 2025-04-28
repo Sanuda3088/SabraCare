@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { authContext } from "../../context/AuthContext";
 import userImg from "../../assets/images/Star.png";
 import MyBookings from "./MyBookings";
@@ -19,6 +19,17 @@ const MyAccount = () => {
   const { data, loading, error } = useGetProfile(
     `${BASE_URL}/users/profile/me`
   );
+
+  const handleExpiredToken = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/login", { replace: true });
+  };
+
+  useEffect(() => {
+    if (error && error.message === "Token expired") {
+      handleExpiredToken();
+    }
+  }, [error]);
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
@@ -49,17 +60,12 @@ const MyAccount = () => {
     }
   };
 
-  const handleExpiredToken = () => {
-    dispatch({ type: "LOGOUT" });
-    navigate("/login", { replace: true });
-  };
-
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
         {/* {loading && !error && <Loading />} */}
-        {error && !loading && handleExpiredToken()}
-        {/* {error && !loading && <Error errorMsg={error} />} */}
+        {/* {error && !loading && handleExpiredToken()} */}
+        {error && !loading && <Error errorMsg={error} />}
 
         {!loading && !error && (
           <div className="grid md:grid-cols-3 gap-10">
