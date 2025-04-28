@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useNavigate } from "react";
 import { authContext } from "../../context/AuthContext";
 import userImg from "../../assets/images/Star.png";
 import MyBookings from "./MyBookings";
@@ -14,7 +14,7 @@ const MyAccount = () => {
   const { dispatch } = useContext(authContext);
   const [tab, setTab] = useState("bookings");
   const [isConfirmPopUpOpen, setIsConfirmPopUpOpen] = useState(false); // State to control modal visibility
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { data, loading, error } = useGetProfile(
     `${BASE_URL}/users/profile/me`
