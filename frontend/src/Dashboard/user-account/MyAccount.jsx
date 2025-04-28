@@ -27,7 +27,8 @@ const MyAccount = () => {
   };
 
   useEffect(() => {
-    if (error && error.message === "Token has been expired") {
+    console.log("Error object:", error);
+    if (error && (error.message === "Token has been expired." || error.message === "Invalid token.")) {
       handleExpiredToken();
     }
   }, [error]);
@@ -64,7 +65,7 @@ const MyAccount = () => {
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
-        {/* {loading && !error && <Loading />} */}
+        {loading && !error && <Loading />}
         {/* {error && !loading && handleExpiredToken()} */}
         {error && !loading && <Error errorMsg={error} />}
 
