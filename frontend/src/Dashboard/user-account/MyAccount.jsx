@@ -1,4 +1,5 @@
-import { useContext, useState, useEffect, useNavigate } from "react";
+import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import userImg from "../../assets/images/Star.png";
 import MyBookings from "./MyBookings";
