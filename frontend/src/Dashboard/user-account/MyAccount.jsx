@@ -26,7 +26,7 @@ const MyAccount = () => {
   };
 
   useEffect(() => {
-    if (error && error.message === "Token expired") {
+    if (error && error.message === "Token has been expired") {
       handleExpiredToken();
     }
   }, [error]);
