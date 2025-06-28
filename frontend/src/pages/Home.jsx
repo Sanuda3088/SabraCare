@@ -241,7 +241,7 @@ const Home = () => {
       {/* Feature-section end */}
 
        {/* {====== our great doctors start =========} */}
-       <section>
+       {/* <section>
         <div className="container">
           <div className="xl:w-[470px] mx-auto">
             <h2 className="heading text-center"> Our great doctors</h2>
@@ -262,7 +262,7 @@ const Home = () => {
           </section>
 
         </div>
-      </section>
+      </section> */}
       {/* {====== our great doctors end =========} */}
 
     </>
