@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { BASE_URL } from "../config";
 
 const initialState = {
   user:
@@ -120,7 +121,7 @@ export const AuthContextProvider = ({ children }) => {
       }
 
       try {
-        const response = await fetch(`${import.meta.env.VITE_BASE_URL || 'http://localhost:8000/api/v1'}/auth/refresh-token`, {
+        const response = await fetch(`${BASE_URL}/auth/refresh-token`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
