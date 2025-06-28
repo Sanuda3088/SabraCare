@@ -10,6 +10,7 @@ import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
 import ConfirmPopUp from "../../pages/ConfirmPopUp";
 import { toast } from "react-toastify";
+import api from "../../../utils/axiosIntance"
 
 const MyAccount = () => {
   const { dispatch } = useContext(authContext);
@@ -25,7 +26,8 @@ const MyAccount = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/login", { replace: true });
   };
-
+  
+ 
   useEffect(() => {
     console.log("Error object:", error);
     if (error && (error.message === "Token has been expired." || error.message === "Invalid token.")) {
@@ -37,28 +39,39 @@ const MyAccount = () => {
     dispatch({ type: "LOGOUT" });
   };
 
+  // const handleDeleteAccount = async () => {
+  //   try {
+  //     const res = await fetch(`${BASE_URL}/users/${data._id}`, {
+  //       method: "DELETE",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+
+  //     const result = await res.json();
+
+  //     if (!res.ok) {
+  //       throw new Error(result.message);
+  //     }
+
+  //     toast.success(result.message);
+
+  //     // Log the user out and redirect to the login page
+  //     dispatch({ type: "LOGOUT" });
+  //     navigate("/login");
+  //   } catch (error) {
+  //     toast.error(error.message || "An error occurred");
+  //   }
+  // };
+  
   const handleDeleteAccount = async () => {
     try {
-      const res = await fetch(`${BASE_URL}/users/${data._id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const result = await res.json();
-
-      if (!res.ok) {
-        throw new Error(result.message);
-      }
-
-      toast.success(result.message);
-
-      // Log the user out and redirect to the login page
+      const res = await api.delete(`/users/${data._id}`);
+      toast.success(res.data.message);
       dispatch({ type: "LOGOUT" });
       navigate("/login");
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message || "An error occurred");
     }
   };
 

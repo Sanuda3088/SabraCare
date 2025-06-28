@@ -4,107 +4,180 @@ import Doctor from '../models/DoctorSchema.js'
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-const generateToken = user =>{
-    return jwt.sign({id:user._id, role:user.role}, process.env.JWT_SECRET_KEY,{
-        expiresIn:'1h',
-    })
+// const generateToken = user =>{
+//     return jwt.sign({id:user._id, role:user.role}, process.env.JWT_SECRET_KEY,{
+//         expiresIn:'1h',
+//     })
+// };
+
+const generateAccessToken = (user) => {
+    return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET_KEY, {
+        expiresIn: "15m", // Short-lived access token
+    });
 };
 
-export const register = async(req,res)=>{
+const generateRefreshToken = (user) => {
+    return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_REFRESH_SECRET_KEY, {
+        expiresIn: "7d", // Long-lived refresh token
+    });
+};
 
-    const {email, password, name, role, photo, gender} = req.body;
+export const register = async (req, res) => {
+
+    const { email, password, name, role, photo, gender } = req.body;
 
     try {
         let user = null;
-        if(role === 'patient'){
-            user = await User.findOne({email})
+        if (role === 'patient') {
+            user = await User.findOne({ email })
         }
-        else if(role === 'doctor'){
-            user = await Doctor.findOne({email})
+        else if (role === 'doctor') {
+            user = await Doctor.findOne({ email })
         }
 
         //check if user exist
-        if(user){
-            return res.status(400).json({message:'User already exist'});
+        if (user) {
+            return res.status(400).json({ message: 'User already exist' });
         }
 
         //hash password
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(password, salt);
 
-        if(role==='patient'){
+        if (role === 'patient') {
             user = new User({
                 name,
                 email,
-                password:hashPassword,
+                password: hashPassword,
                 photo,
                 gender,
                 role
-        });
+            });
         };
 
-        if(role==='doctor'){
+        if (role === 'doctor') {
             user = new Doctor({
                 name,
                 email,
-                password:hashPassword,
+                password: hashPassword,
                 photo,
                 gender,
                 role
-        });
+            });
         }
 
-      
+
 
         await user.save();
         const token = generateToken(user);
-        res.status(200).json({success:true, message:'User created successfully', data:{token,user}});
+        res.status(200).json({ success: true, message: 'User created successfully', data: { token, user } });
 
     } catch (error) {
-        res.status(500).json({success:false, message:'Internal Server error, Try Again'});
+        res.status(500).json({ success: false, message: 'Internal Server error, Try Again' });
     }
 };
 
 
-export const login = async(req,res)=>{
+// export const login = async(req,res)=>{
 
-    const {email, password} = req.body;
+//     const {email, password} = req.body;
+
+//     try {
+//         let user = null;
+//         const patient = await User.findOne({email});
+//         const doctor = await Doctor.findOne({email});
+
+//         if(patient){
+//             user = patient;
+//         }
+//         if(doctor){
+//             user = doctor;
+//         }
+
+//         //check if user exists or not
+//         if(!user){
+//             return res.status(404).json({message:'User not found'});
+//         }
+
+//         //compare password
+//         const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
+//         if(!isPasswordMatch){
+//             return res.status(400).json({status:false, message:'Invalid credentials'});
+//         }
+
+//          //get token
+//          const token = generateToken(user);
+
+//          const {password, role, appointments, ...rest} = user._doc;
+
+//          res
+//             .status(200)
+//             .json({status:true, message:"Successfully LoggedIn", token, data:{...rest}, role});
+
+//     } catch (error) {
+//         res
+//         .status(500)
+//         .json({status:false, message:"LogIn Failed"});  
+//     }
+// };
+
+
+
+export const login = async (req, res) => {
+    const { email, password } = req.body;
 
     try {
-        let user = null;
-        const patient = await User.findOne({email});
-        const doctor = await Doctor.findOne({email});
-        
-        if(patient){
-            user = patient;
-        }
-        if(doctor){
-            user = doctor;
-        }
-        
-        //check if user exists or not
-        if(!user){
-            return res.status(404).json({message:'User not found'});
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
         }
 
-        //compare password
-        const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
-        if(!isPasswordMatch){
-            return res.status(400).json({status:false, message:'Invalid credentials'});
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if (!isPasswordMatch) {
+            return res.status(400).json({ message: "Invalid credentials" });
         }
 
-         //get token
-         const token = generateToken(user);
+        // Generate tokens
+        const accessToken = generateAccessToken(user);
+        const refreshToken = generateRefreshToken(user);
 
-         const {password, role, appointments, ...rest} = user._doc;
+        // Save refresh token in the database
+        user.refreshToken = refreshToken;
+        await user.save();
 
-         res
-            .status(200)
-            .json({status:true, message:"Successfully LoggedIn", token, data:{...rest}, role});
-
+        res.status(200).json({
+            message: "Successfully logged in",
+            accessToken,
+            refreshToken,
+        });
     } catch (error) {
-        res
-        .status(500)
-        .json({status:false, message:"LogIn Failed"});  
+        res.status(500).json({ message: "Login failed" });
+    }
+};
+
+
+export const refreshAccessToken = async (req, res) => {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+        return res.status(401).json({ message: "Refresh token is required" });
+    }
+
+    try {
+        // Verify the refresh token
+        const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET_KEY);
+
+        // Check if the refresh token exists in the database
+        const user = await User.findById(decoded.id);
+        if (!user || user.refreshToken !== refreshToken) {
+            return res.status(403).json({ message: "Invalid refresh token" });
+        }
+
+        // Generate a new access token
+        const accessToken = generateAccessToken(user);
+
+        res.status(200).json({ accessToken });
+    } catch (error) {
+        res.status(403).json({ message: "Invalid or expired refresh token" });
     }
 };

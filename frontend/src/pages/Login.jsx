@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { BASE_URL } from "../config";
 import { toast } from "react-toastify";
 import { authContext } from "../context/AuthContext.jsx";
@@ -13,7 +13,44 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { dispatch } = useContext(authContext);
+
+  // Handle logout reasons and show appropriate messages
+  useEffect(() => {
+    const reason = searchParams.get('reason');
+    
+    if (reason) {
+      switch (reason) {
+        case 'inactivity':
+          toast.warning("Your session expired due to inactivity. Please log in again.");
+          break;
+        case 'token_expired':
+          toast.warning("Your session has expired. Please log in again.");
+          break;
+        case 'session_expired':
+          toast.warning("Your session has expired. Please log in again.");
+          break;
+        case 'unauthorized':
+          toast.error("You are not authorized to access this resource.");
+          break;
+        case 'network_error':
+          toast.error("Network error occurred. Please check your connection and try again.");
+          break;
+        case 'no_refresh_token':
+          toast.warning("Session expired. Please log in again.");
+          break;
+        case 'invalid_refresh_token':
+          toast.warning("Invalid session. Please log in again.");
+          break;
+        default:
+          break;
+      }
+      
+      // Clear the reason from URL
+      navigate('/login', { replace: true });
+    }
+  }, [searchParams, navigate]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,7 +80,8 @@ const Login = () => {
         payload: {
           user: result.data,
           role: result.role,
-          token: result.token,
+          accessToken: result.accessToken,
+          refreshToken: result.refreshToken,
         },
       });
 
