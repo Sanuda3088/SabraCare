@@ -80,7 +80,7 @@ const Login = () => {
         payload: {
           user: result.data,
           role: result.role,
-          accessToken: result.accessToken,
+          accessToken: result.token, // always use 'token' from backend
           refreshToken: result.refreshToken,
         },
       });

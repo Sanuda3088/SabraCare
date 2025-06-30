@@ -13,13 +13,21 @@ import { toast } from "react-toastify";
 import api from "../../../utils/axiosIntance"
 
 const MyAccount = () => {
-  const { dispatch } = useContext(authContext);
+  const { user, token, dispatch } = useContext(authContext);
   const [tab, setTab] = useState("bookings");
   const [isConfirmPopUpOpen, setIsConfirmPopUpOpen] = useState(false); // State to control modal visibility
   const navigate = useNavigate();
 
+  // Wait for user and token before fetching profile
+  const shouldFetchProfile = user && token;
+
+  // Show loader if user or token context is not ready
+  if (!shouldFetchProfile) {
+    return <Loading />;
+  }
+
   const { data, loading, error } = useGetProfile(
-    `${BASE_URL}/users/profile/me`
+    shouldFetchProfile ? `${BASE_URL}/users/profile/me` : null
   );
 
   const handleExpiredToken = () => {

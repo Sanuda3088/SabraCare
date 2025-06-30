@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Loader from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
 import useGetProfile from "../../hooks/useFetchData";
@@ -10,13 +10,19 @@ import doc from "../../assets/images/doctor-img03.png";
 import DoctorAbout from "../../pages/Doctors/DoctorAbout";
 import Profile from "./Profile";
 import Appointments from "./Appointments";
+import { authContext } from "../../context/AuthContext";
 
 const Dashboard = () => {
   const { data, loading, error } = useGetProfile(
     `${BASE_URL}/doctors/profile/me`
   );
-
+  const { user } = useContext(authContext);
   const [tab, setTab] = useState("overview");
+
+  // Show loader if user context is not ready
+  if (!user) {
+    return <Loader />;
+  }
 
   return (
     <section>

@@ -19,10 +19,10 @@ function About() {
             {/* About-section-content */}
             <div className="w-full lg:w-1/2 xl:w-[670px] order-1 lg:order-2">
             <h2 className='heading'>Proud to be one of the nations best</h2>
-            <p className='text__para'>For 30 years in a row, U.S. News & World Report has recognized us as one of the best public hospitals in the nation and #1 in Texas. Lorem impsum dolor sit amet consectetur, adipisicling elit. quas, nemo?</p>
-            <p className='text__para mt-[30px]'>Our best is something we strive for each day, caring for our patients-not looking back at what we accomplished but towards what we can do tomorrow. providing the best.  Lorem impsum dolor sit amet consectetur, adipisicling elit. quas, nemo?</p>
+            <p className='text__para'>For over 5 years, we’ve stood alongside Sri Lankan families delivering trusted, compassionate care in every corner of the island. Recognized for our excellence in patient outcomes, innovation, and community service, we continue to set the standard for healthcare in the nation.</p>
+            <p className='text__para mt-[30px]'>At <b>SabraCare</b>, our best is never behind us. Each day, we look ahead—caring for every patient with integrity, empathy, and expertise. Because to us, excellence isn’t a milestone. It’s a promise.</p>
 
-            <Link to='/'>
+            <Link to='/doctors'>
             <button className="btn">Learn More</button>
             </Link>
             </div>

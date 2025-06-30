@@ -1,5 +1,5 @@
 import convertTime from "../../../utils/convertTime";
-import { BASE_URL, token } from "../../config.js";
+import { BASE_URL } from "../../config.js";
 import { toast } from "react-toastify";
 
 const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
@@ -9,7 +9,7 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
     try {
       // const userId = localStorage.getItem("userId");
       const userId = JSON.parse(user)._id;
-
+      const token = localStorage.getItem("token");
       const res = await fetch(
         `${BASE_URL}/bookings/checkout-session/${doctorId}/${userId}`,
         {

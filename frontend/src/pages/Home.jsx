@@ -31,12 +31,12 @@ const Home = () => {
                   We help patients live a healthy, longer life.
                 </h1>
                 <p className="text_para">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Perferendis accusantium cum harum aspernatur nemo qui ad
-                  doloremque voluptatem et? Omnis vel repellat beatae quis
-                  asperiores qui molestias eum repudiandae deserunt!
+                  Providing world-class medical expertise, personalized care, and a deep commitment to innovation, 
+                  we empower every patient to lead a healthier, fuller life—physically, mentally, 
+                  and emotionally.
                 </p>
-                <button className="btn">Request an Appointment</button>
+                <a href="./register"><button className="btn">Request an Appointment</button></a>
+                
               </div>
               {/*============= hero counter ===========*/}
               <div className="mt-[30px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]">
@@ -97,8 +97,7 @@ const Home = () => {
                   Find a Doctor
                 </h2>
                 <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                  World-class care for everyone. Our health System offers
-                  unmatched, expert health care. From lab to the clinics.
+                  Our health system brings together trusted professionals and cutting-edge diagnostics—ensuring you receive the right care, right when you need it.
                 </p>
                 <Link
                   to="./doctors"
@@ -118,8 +117,7 @@ const Home = () => {
                   Find a Location
                 </h2>
                 <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                  World-class care for everyone. Our health System offers
-                  unmatched, expert health care. From lab to the clinics.
+                  With multiple clinics and hospitals across the region, we make it easier than ever to get expert care—from neighborhood wellness centers to advanced specialty facilities.
                 </p>
                 <Link
                   to="./doctors"
@@ -139,8 +137,7 @@ const Home = () => {
                   Book Appointmnet
                 </h2>
                 <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                  World-class care for everyone. Our health System offers
-                  unmatched, expert health care. From lab to the clinics.
+                  Choose the care you need and book your visit in just minutes—online or in-person. We’re ready when you are, with flexible options tailored to your time and needs.
                 </p>
                 <Link
                   to="./doctors"
@@ -198,7 +195,7 @@ const Home = () => {
                   online scheduling tool to select an appointment time.
                 </li>
               </ul>
-              <Link to="/">
+              <Link to="/register">
                 <button className="btn">Learn More</button>
               </Link>
             </div>
