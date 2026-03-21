@@ -20,7 +20,7 @@ function About() {
             <div className="w-full lg:w-1/2 xl:w-[670px] order-1 lg:order-2">
             <h2 className='heading'>Proud to be one of the nations best</h2>
             <p className='text__para'>For over 5 years, we’ve stood alongside Sri Lankan families delivering trusted, compassionate care in every corner of the island. Recognized for our excellence in patient outcomes, innovation, and community service, we continue to set the standard for healthcare in the nation.</p>
-            <p className='text__para mt-[30px]'>At <b>SabraCare</b>, our best is never behind us. Each day, we look ahead—caring for every patient with integrity, empathy, and expertise. Because to us, excellence isn’t a milestone. It’s a promise.</p>
+            <p className='text__para mt-[30px]'>At <b>Life Health Care</b>, our best is never behind us. Each day, we look ahead—caring for every patient with integrity, empathy, and expertise. Because to us, excellence isn’t a milestone. It’s a promise.</p>
 
             <Link to='/doctors'>
             <button className="btn">Learn More</button>

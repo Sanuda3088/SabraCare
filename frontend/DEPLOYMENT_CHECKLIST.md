@@ -20,7 +20,7 @@ Make sure these are set in your Vercel project settings:
 
 #### Frontend Environment Variables
 ```
-VITE_BASE_URL=https://sabracarebackend.onrender.com/api/v1
+VITE_BASE_URL=https://Life Health Carebackend.onrender.com/api/v1
 ```
 
 #### Backend Environment Variables
