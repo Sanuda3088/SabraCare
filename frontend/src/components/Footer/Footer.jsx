@@ -88,7 +88,7 @@ const Footer = () => {
                         <img src={logo} alt="" className="w-full h-auto object-contain" />
                       </div>
             <p className="text-[16px] leading-7 font-[400] text-textColor">
-              Copyright @ SabraCare {year} developed as a community service
+              Copyright @ Life Health Care {year} developed for Computer Based Project
             </p>
             <div className="flex items-center gap-3 mt-4">
               {socialLinks.map((link, index) => (
